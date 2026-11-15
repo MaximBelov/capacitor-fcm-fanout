@@ -1,6 +1,6 @@
 {
   "name": "capacitor-fcm-fanout",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "One Firebase Cloud Messaging service for Capacitor apps on Android that hands every token and message to Airship and Intercom",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
