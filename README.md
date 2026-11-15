@@ -68,7 +68,7 @@ unless the plugin's service is the only one besides that fallback.
 
 ### SDK versions
 
-The routing is compiled against Intercom `18.13.0` and `urbanairship-fcm` `21.0.2` (what `@ua/capacitor-airship` 7
+The routing is compiled against Intercom `18.13.0` and `urbanairship-fcm` `21.2.0` (what `@ua/capacitor-airship` 7
 brings) and runs against whatever versions the app links. The app's `variables.gradle` can move the compile-time ones
 with `intercomSdkVersion` (which `@capacitor-community/intercom` reads too) and `airshipFcmVersion`, and Firebase
 Messaging with `firebaseMessagingVersion` (as `@capacitor-firebase/messaging` reads it). A version whose API no longer
