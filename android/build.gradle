@@ -6,7 +6,7 @@ ext {
     // Compiled against only: the app brings the SDK it actually runs, through the Intercom plugin (which reads the same
     // property) and the Airship plugin. These are the versions the routing code is built and tested against.
     intercomSdkVersion = project.hasProperty('intercomSdkVersion') ? rootProject.ext.intercomSdkVersion : '18.13.0'
-    airshipFcmVersion = project.hasProperty('airshipFcmVersion') ? rootProject.ext.airshipFcmVersion : '21.0.2'
+    airshipFcmVersion = project.hasProperty('airshipFcmVersion') ? rootProject.ext.airshipFcmVersion : '21.2.0'
 }
 
 buildscript {
