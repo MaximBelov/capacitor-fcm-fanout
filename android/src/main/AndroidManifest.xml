@@ -1,0 +1,17 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <!--
+          Firebase delivers a token or a message to one service only. The services the Airship and Intercom plugins (and
+          @capacitor-firebase/messaging) declare for the same action have to be removed in the APP's manifest, which
+          outranks every library manifest; see the README. This manifest removes nothing itself: a library's
+          tools:node="remove" reaches only the manifests merged below it, and that order is not the library's to choose.
+        -->
+        <service
+            android:name="io.github.maximbelov.fcmfanout.FcmFanoutMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+    </application>
+</manifest>

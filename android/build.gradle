@@ -1,0 +1,72 @@
+ext {
+    junitVersion = project.hasProperty('junitVersion') ? rootProject.ext.junitVersion : '4.13.2'
+    androidxAppCompatVersion = project.hasProperty('androidxAppCompatVersion') ? rootProject.ext.androidxAppCompatVersion : '1.7.1'
+    // The same property and default as @capacitor-firebase/messaging, so an app that sets it moves both together.
+    firebaseMessagingVersion = project.hasProperty('firebaseMessagingVersion') ? rootProject.ext.firebaseMessagingVersion : '25.0.1'
+    // Compiled against only: the app brings the SDK it actually runs, through the Intercom plugin (which reads the same
+    // property) and the Airship plugin. These are the versions the routing code is built and tested against.
+    intercomSdkVersion = project.hasProperty('intercomSdkVersion') ? rootProject.ext.intercomSdkVersion : '18.13.0'
+    airshipFcmVersion = project.hasProperty('airshipFcmVersion') ? rootProject.ext.airshipFcmVersion : '21.0.2'
+}
+
+buildscript {
+    ext.kotlin_version = project.hasProperty("kotlin_version") ? rootProject.ext.kotlin_version : '2.2.20'
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:9.5.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    namespace = "io.github.maximbelov.fcmfanout"
+    compileSdk = project.hasProperty('compileSdkVersion') ? rootProject.ext.compileSdkVersion : 36
+    defaultConfig {
+        minSdkVersion project.hasProperty('minSdkVersion') ? rootProject.ext.minSdkVersion : 26
+        targetSdkVersion project.hasProperty('targetSdkVersion') ? rootProject.ext.targetSdkVersion : 36
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        abortOnError = false
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
+    }
+}
+
+kotlin {
+    jvmToolchain(21)
+}
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':capacitor-android')
+    implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
+    // The service extends FirebaseMessagingService, so the plugin needs Firebase Messaging whatever else the app has.
+    // Gradle resolves one version of it for the whole app.
+    implementation "com.google.firebase:firebase-messaging:$firebaseMessagingVersion"
+    // compileOnly: the plugin never adds a copy of either SDK. A receiver whose SDK is missing at run time is left out
+    // (ReceiverCatalogue), so an app with only one of them works.
+    compileOnly "io.intercom.android:intercom-sdk:$intercomSdkVersion"
+    compileOnly "com.urbanairship.android:urbanairship-fcm:$airshipFcmVersion"
+    testImplementation "junit:junit:$junitVersion"
+}

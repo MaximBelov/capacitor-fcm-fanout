@@ -1,0 +1,5 @@
+{
+  "appId": "com.example.plugin",
+  "appName": "FCM Fan-out",
+  "webDir": "dist"
+}

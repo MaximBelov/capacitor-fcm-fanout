@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>FCM Fan-out</title>
+    <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0" />
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 16px; padding-top: env(safe-area-inset-top); }
+      button { display: block; margin: 6px 0; font-size: 16px; }
+      pre { white-space: pre-wrap; font-size: 13px; background: #f3f3f3; padding: 8px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>FCM Fan-out</h1>
+      <p>
+        Shows which services of this app receive Firebase messages, and which SDKs the plugin's service routes to. This
+        example has neither Airship nor Intercom, so on Android it lists the plugin's service and no receivers; on iOS
+        the plugin routes nothing.
+      </p>
+      <button id="status">Get status</button>
+      <pre id="log"></pre>
+    </main>
+    <script src="./js/example.js" type="module"></script>
+  </body>
+</html>
